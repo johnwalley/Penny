@@ -1,0 +1,26 @@
+<div class="container">
+  <h2>My moods</h2>
+
+  <!-- Moods input -->
+  <form role="form" ng-submit="addMood()">
+    <div class="row">
+      <div class="input-group">
+        <input type="text" ng-model="mood" placeholder="How are you feeling?" class="form-control">
+        <span class="input-group-btn">
+          <input type="submit" class="btn btn-primary" value="Add">
+        </span>
+      </div>
+    </div>
+  </form>
+  <p></p>
+
+  <!-- Moods list -->
+  <div ui-sortable>
+    <p class="input-group" ng-repeat="mood in moods" style="padding:5px 10px; cursor: move;">
+      <input type="text" ng-model="mood" class="form-control">
+      <span class="input-group-btn">
+        <button class="btn btn-danger" ng-click="removeMood($index)" aria-label="Remove">X</button>
+      </span>
+    </p>
+  </div>
+</div>
