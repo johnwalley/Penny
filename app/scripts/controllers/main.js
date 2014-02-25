@@ -1,16 +1,25 @@
 'use strict';
 
 angular.module('pennyApp')
-  .controller('MainCtrl', function ($scope) {
+.controller('MainCtrl', function ($scope) {
 
-	$scope.moods = [];
+	var defaultRating = 5;
+
+	$scope.debug = false;
+
+	$scope.mood = { description: '', rating: defaultRating };
+
+	$scope.thought = {};
+	$scope.thought.moods = [ {description: 'Happy', rating: 3},
+	{description: 'Sad', rating: 4}];
 
 	$scope.addMood = function () {
-	  $scope.moods.push($scope.mood);
-	  $scope.mood = '';
+		$scope.mood.ratingNow = $scope.mood.rating;
+		$scope.thought.moods.push($scope.mood);
+		$scope.mood = { description: '', rating: defaultRating };
 	};
 
 	$scope.removeMood = function (index) {
-	  $scope.moods.splice(index, 1);
+		$scope.thought.moods.splice(index, 1);
 	};
 });

@@ -17,19 +17,19 @@ describe('Controller: MainCtrl', function () {
   }));
 
   it('should have no items to start', function () {
-      expect(scope.moods.length).toBe(0);
+      expect(scope.thought.moods.length).toBe(2);
     });
 
   it('should add items to the list', function () {
       scope.mood = 'Test 1';
       scope.addMood();
-      expect(scope.moods.length).toBe(1);
+      expect(scope.thought.moods.length).toBe(3);
     });
 
   it('should add items to the list', function () {
       scope.mood = 'Test 1';
       scope.addMood();
       scope.removeMood(0);
-      expect(scope.moods.length).toBe(0);
+      expect(scope.thought.moods.length).toBe(2);
     });
 });

@@ -4,6 +4,7 @@ angular.module('pennyApp', [
   'ngResource',
   'ngRoute',
   'ui',
+  'ui.bootstrap',
   'LocalStorageModule'
 ])
   .config(function ($routeProvider) {
