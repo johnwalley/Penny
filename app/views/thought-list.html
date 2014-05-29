@@ -19,9 +19,13 @@
 
   <hr/>
 
-  <a href="#/thoughts/add">
-    <button class="btn btn-primary">Add Thought</button>
-  </a>
+  <div class="row">
+    <div class="col-xs-8">
+      <a href="#/thoughts/add">
+        <button class="btn btn-primary">Add Thought</button>
+      </a>
+    </div>
+  </div>
 
   <div class="list-group">
     <a class="list-group-item clearfix" ng-repeat="thought in thoughts | filter:query | orderBy:orderProp" ng-click="show(thought.id)">
@@ -32,12 +36,14 @@
         </div>
         <div class="col-xs-4">
           <span class="pull-right">
-            <button class="btn btn-icon" ng-click="edit(thought.id)">
-              <i class="glyphicon glyphicon-pencil"></i>
-            </button>
-            <button class="btn btn-icon" ng-click="remove(thought.id)">
-              <i class="glyphicon glyphicon-remove"></i>
-            </button>        
+            <div class="btn-group">
+              <button class="btn btn-default" ng-click="edit(thought.id)">
+                <i class="glyphicon glyphicon-pencil"></i>
+              </button>
+              <button class="btn btn-danger" ng-click="remove(thought.id)">
+                <i class="glyphicon glyphicon-remove"></i>
+              </button>  
+            </div>      
           </span>
         </div>
       </div>
