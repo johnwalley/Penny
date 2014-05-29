@@ -4,13 +4,27 @@
   <hr>
   <pre ng-show="debug">thoughts = {{thoughts | json}}</pre>    
 
+  <div class="row">
+    <div class="col-xs-4">
+      Search: <input class="form-control" placeholder="Search..." ng-model="query">
+    </div>
+    <div class="col-xs-3">
+      Sort by:
+      <select ng-model="orderProp" class="form-control">
+        <option value="situation">Situation</option>
+        <option value="-updated" selected>Newest</option>
+      </select>
+    </div>
+  </div>
+
+  <hr/>
 
   <a href="#/thoughts/add">
     <button class="btn btn-primary">Add Thought</button>
   </a>
 
   <ul class="list-unstyled">
-    <li ng-repeat="thought in thoughts">
+    <li ng-repeat="thought in thoughts | filter:query | orderBy:orderProp">
       <a href="#/thoughts/{{thought.id}}">{{thought.situation}}</a> - {{thought.updated | date:'dd/MM/yyyy @ h:mma'}}
      <button class="btn btn-icon" ng-click="edit(thought.id)">
        <i class="glyphicon glyphicon-pencil"></i>

@@ -11,9 +11,14 @@ pennyAppServices
       localStorageService.add('foo', foo);
       return localStorageService.get('thoughts');
     },
-    get: function(i) {
+    get: function(id) {
       var thoughts = localStorageService.get('thoughts');
-      return thoughts[i];
+
+      for (var i = 0; i < thoughts.length; i++) {
+        if (thoughts[i].id === parseInt(id)) {
+          return thoughts[i];
+        }
+      }
     },
     store: function(thought) {
       var thoughts = this.query();
@@ -23,6 +28,7 @@ pennyAppServices
       for (var i = 0; i < thoughts.length; i++) {
         if (thoughts[i].id === thought.id) {
           thoughts[i] = thought;
+          exist = true;
           break;
         }
       }
@@ -36,7 +42,7 @@ pennyAppServices
           }
         }
 
-        thought.id = highest + 1;        
+        thought.id = highest + 1;
 
         thought.updated = new Date();
 

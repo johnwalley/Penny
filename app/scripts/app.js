@@ -10,8 +10,8 @@ angular.module('pennyApp', [
   .config(function ($routeProvider) {
     $routeProvider
       .when('/', {
-        templateUrl: 'views/main.html',
-        controller: 'MainCtrl'
+        templateUrl: 'views/thought-list.html',
+        controller: 'ThoughtListCtrl'
       })
       .when('/thoughts', {
         templateUrl: 'views/thought-list.html',

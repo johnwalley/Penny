@@ -2,12 +2,57 @@
 
   <button class="btn btn-info" ng-click="debug=!debug">Debug</button>
   <hr>
-  <pre ng-show="debug">thought = {{thoughts[thoughtId] | json}}</pre>   
+  <pre ng-show="debug">thought = {{thought | json}}</pre>    
 
-  <button class="button button-icon" ng-click="editThought()">
-    <i class="glyphicon glyphicon-pencil"></i>
-  </button>
+  <button class="btn btn-primary" ng-click="edit(thought.id)">Edit</button>
 
-  <span>{{thought.situation}}</span>
+  <div class="row">
+    <h2>Situation</h2>
+    <p>{{thought.situation}}</p>
+  </div>    
 
+  <div class="row">
+    <h2>Moods</h2>
+
+    <!-- Moods list -->
+    <ul class="list-unstyled">
+      <li ng-repeat="mood in thought.moods">
+        <span>{{mood.description}} <rating value="mood.rating" max="10" readonly="true"></rating></span>   
+        </p>
+      </li>
+    </ul>
+  </div>    
+
+  <div class="row">
+    <h2>Automatic Thoughts (Images)</h2>
+    <p>{{thought.automaticThoughts}}</p>
+  </div>   
+
+
+  <div class="row">
+    <h2>Evidence That Supports the Hot Thought</h2>
+    <p>{{thought.evidenceFor}}</p>
+  </div>      
+
+
+  <div class="row">
+    <h2>Evidence That Does Not Support the Hot Thought</h2>
+    <p>{{thought.evidenceAgainst}}</p>
+  </div>        
+
+  <div class="row">
+    <h2>Alternative/Balanced Thoughts</h2>
+    <p>{{thought.alternativeThoughts}}</p>
+  </div>    
+
+  <div class="row">
+    <h2>Rate Moods Now</h2>
+
+    <ul class="list-unstyled">
+      <li ng-repeat="mood in thought.moods">
+        <span>{{mood.description}} <rating value="mood.ratingNow" max="10" readonly="true"></rating></span>   
+        </p>
+      </li>
+    </ul>
+  </div>  
 </div>
