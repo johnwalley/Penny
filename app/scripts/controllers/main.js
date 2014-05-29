@@ -40,9 +40,39 @@ pennyAppControllers
 }]);
 
 pennyAppControllers
-.controller('ThoughtListCtrl', ['$scope', '$location', 'Thoughts', function ($scope, $location, Thoughts) {
+.controller('ThoughtListCtrl', ['$scope', '$location', 'Thoughts', '$modal', function ($scope, $location, Thoughts, $modal) {
 	
 	$scope.thoughts = Thoughts.query();
+
+  $scope.confirm = function (id) {
+
+    var modalInstance = $modal.open({
+      templateUrl: 'myModalContent.html',
+      controller: ModalInstanceCtrl,
+      resolve: {
+        thought: function () {
+          return Thoughts.get(id);
+        }
+      }
+    });
+
+    modalInstance.result.then(function () {
+      $scope.remove(id);
+    }, function () {});
+  };
+
+  var ModalInstanceCtrl = function ($scope, $modalInstance, thought) {
+
+    $scope.thought = thought;
+
+    $scope.ok = function () {
+      $modalInstance.close();
+    };
+
+    $scope.cancel = function () {
+      $modalInstance.dismiss();
+    };
+  };
 
   $scope.show = function(id) {
     $location.path('thoughts/' + id);
