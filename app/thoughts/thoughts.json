@@ -1,12 +1,14 @@
 [
     {
         "id": 0, 
-        "situation": "At home", 
-        "automaticThoughts": "Happy"
+        "situation": "At home",
+        "moods": [ { "description": "Happy", "rating": 4 }, { "description": "Sad", "rating": 3 }],
+        "automaticThoughts": "Again"
     },
     {
         "id": 1, 
-        "situation": "At work", 
-        "automaticThoughts": "Sad"
+        "situation": "At work",
+        "moods": [ { "description": "Happy", "rating": 4 }, { "description": "Sad", "rating": 3 }],
+        "automaticThoughts": "Again"        
     }    
 ]

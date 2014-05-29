@@ -3,10 +3,61 @@
 var pennyAppServices = angular.module('pennyApp');
 
 pennyAppServices
-.factory('Thoughts', ['$resource', function ($resource) {
+.factory('Thoughts', ['localStorageService', function (localStorageService) {
 
-  return $resource('thoughts/thoughts.json', {}, {
-    query: {method:'GET', isArray:true}
-  });
+  return {
+    query: function() {
+      var foo = [ 1, 2 ];
+      localStorageService.add('foo', foo);
+      return localStorageService.get('thoughts');
+    },
+    get: function(i) {
+      var thoughts = localStorageService.get('thoughts');
+      return thoughts[i];
+    },
+    store: function(thought) {
+      var thoughts = this.query();
+
+      // Are we editing or adding?
+      var exist = false;
+      for (var i = 0; i < thoughts.length; i++) {
+        if (thoughts[i].id === thought.id) {
+          thoughts[i] = thought;
+          break;
+        }
+      }
+
+      if (!exist) {
+        var highest = 0;
+
+        for (var j = 0; j < thoughts.length; j++) {
+          if (thoughts[j].id > highest) {
+            highest = thoughts[j].id;
+          }
+        }
+
+        thought.id = highest + 1;        
+
+        thought.updated = new Date();
+
+        thoughts.push(thought);
+      }
+
+      localStorageService.add('thoughts', angular.toJson(thoughts));
+    },
+    remove: function(id) {
+      var thoughts = this.query();
+
+      var newThoughts = [];
+
+      for (var i = 0; i < thoughts.length; i++) {
+        if (thoughts[i].id !== id) {
+          newThoughts.push(thoughts[i]);
+        }
+      }
+
+      localStorageService.add('thoughts', angular.toJson(newThoughts));
+    }
+  };
 
 }]);

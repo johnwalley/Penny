@@ -1,0 +1,135 @@
+<div class="container">
+
+  <button class="btn btn-info" ng-click="debug=!debug">Debug</button>
+  <hr>
+  <pre ng-show="debug">thought = {{thought | json}}</pre>    
+
+  <div class="row">
+    <h2>Situation</h2>
+    <div class="form-group">
+      <textarea class="form-control" id="situation" ng-model="thought.situation" placeholder="Who were you with? What were you doing? When was it? Where were you?" rows="3"></textarea>
+      <span class="help-block">Who were you with? What were you doing? When was it? Where were you?</span>
+    </div>
+  </div>    
+
+  <h2>Moods</h2>
+
+  <!-- Moods input -->
+  <form ng-submit="addMood()">
+    <div class="row">
+      <div class="form-group">
+        <div class="input-group">
+          <input type="text" ng-model="mood.description" placeholder="Describe each mood in one word" class="form-control">
+          <rating class="input-group-addon" value="mood.rating" max="10" readonly="false"></rating>           
+          <span class="input-group-btn">
+            <input type="submit" class="btn btn-primary" value="Add">
+          </span>
+        </div>
+        <span class="help-block">Describe each mood in one word. Rate intensity of mood (0-10).</span>
+      </div>
+    </div>
+  </form>
+
+  <!-- Moods list -->
+  <p class="input-group" ng-repeat="mood in thought.moods">
+    <input type="text" ng-model="mood.description" class="form-control">
+    <rating class="input-group-addon" value="mood.rating" max="10" readonly="false"></rating>       
+    <span class="input-group-btn">
+      <button class="btn btn-danger" ng-click="removeMood($index)" aria-label="Remove">X</button>
+    </span>
+  </p>
+
+  <div class="row">
+    <h2>Automatic Thoughts (Images)</h2>
+    <div class="form-group">
+      <textarea class="form-control" id="automaticThoughts" ng-model="thought.automaticThoughts" placeholder="Answer some or all of the questions below" rows="3"></textarea>
+      <span class="help-block">
+        <p>Answer some or all of the following questions:</p>
+        <ul>
+          <li>What was going through my mind just before I started to feel this way?</li>
+          <li>What does this say about me?</li>
+          <li>What does this mean about me? my life? my future?</li>
+          <li>What am I afraid might happen?</li>
+          <li>What is the worst thing that could happen if this is true?</li>
+          <li>What does this mean about how the other person(s) feel/think(s) about me?</li>
+          <li>What does this mean about the other person(s) or people in general?</li>
+          <li>What images or memories do I have in this situation?</li>
+        </ul>
+      </span>
+    </div>
+  </div>   
+
+  <h2>Evidence That Supports the Hot Thought</h2>
+
+  <div class="row">
+    <div class="form-group">
+
+      <div class="radio" ng-repeat="mood in thought.moods">
+        <label class="radio-inline">
+          <input type="radio" name="optionsRadios" ng-model="thought.hotThought" id="{{mood.description}}" value="{{mood.description}}">
+          {{mood.description}}
+        </label>
+      </div>      
+
+      <textarea class="form-control" id="evidenceFor" ng-model="thought.evidenceFor" placeholder="Circle hot thought in previous column from which you are looking for evidence. Write factual evidence to support this conclusion. Try to avoid mind-reading and interpretation of facts." rows="3"></textarea>
+      <span class="help-block">
+        <ul class="list-unstyled">
+          <li>Circle hot thought in previous column from which you are looking for evidence.</li>
+          <li>Write factual evidence to support this conclusion.</li>
+          <li>Try to avoid mind-reading and interpretation of facts.</li>
+        </ul>
+      </span>
+    </div>
+  </div>      
+
+  <h2>Evidence That Does Not Support the Hot Thought</h2>
+
+  <div class="row">
+    <div class="form-group">
+      <textarea class="form-control" id="evidenceAgainst" ng-model="thought.evidenceAgainst" placeholder="Ask yourself the questions below to help discover evidence which does not support your hot thought." rows="3"></textarea>
+      <span class="help-block">
+        <button class="btn btn-default" ng-click="isCollapsed = !isCollapsed">Advice</button>
+        <hr>
+        <div collapse="isCollapsed">
+          <div class="well well-lg">
+            <p>Ask yourself the questions below to help discover evidence which does not support your hot thought:</p>
+            <ul>
+              <li>Have I had any experiences that show that this thought is not completely true all the time?</li>
+              <li>If my best friend or someone I loved had this thought, what would I tell them?</li>
+              <li>If my best friend or someone who loves me know I was thinking this thought, what would they say to me? What evidence would they point out to me that would suggest that my thoughts were not 100% true?</li>
+              <li>When I am not feeling this way, do I think about this type of situation any differently? How?</li>
+              <li>When I have felt this way in the past, what did I think about that helped me feel better?</li>
+            </ul>
+          </div> 
+        </div>        
+      </span>
+    </div>
+  </div>        
+
+  <div class="row">
+    <h2>Alternative/Balanced Thoughts</h2>
+    <div class="form-group">
+      <textarea class="form-control" id="alternativeThoughts" ng-model="thought.alternativeThoughts" placeholder="Ask yourself the questions below to generate alternative or balanced thoughts" rows="3"></textarea>
+      <span class="help-block">
+        <p>Ask yourself the questions below to generate alternative or balanced thoughts:</p>
+        <ul>
+          <li>Based on the evidence I have listed in columns 4 and 5 is there an alternative way of thinking about or understanding the situation?</li>
+          <li>Write one sentence that summarises all the evidence that supports my hot thought (column 4) and all the evidence that does not support my hot thought (column 5). Does combining the two summary statements with the word "and" create a balanced thought that takes into account all the information I have gathered?</li>
+          <li>If someone I cared about was in this situation, had these thoughts, and had this information available, what would be my advice to them? how would I suggest they understand the situation?</li>
+        </ul>
+        <p>Write an alternative or balanced thought.</p>
+        <p>Rate how much you believe in each alternative or balanced thought (0-100%).</p>
+      </span>
+    </div>
+  </div>    
+
+  <h2>Rate Moods Now</h2>
+
+  <p class="input-group" ng-repeat="mood in thought.moods">
+    <input type="text" ng-model="mood.description" class="form-control" disabled>
+    <rating class="input-group-addon" value="mood.ratingNow" max="10" readonly="false"></rating>       
+  </p>
+
+  <button class="btn btn-primary btn-block" ng-click="save()">Save</button>
+  <button class="btn btn-block" ng-click="cancel()">Cancel</button>  
+</div>
