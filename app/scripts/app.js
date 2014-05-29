@@ -13,6 +13,14 @@ angular.module('pennyApp', [
         templateUrl: 'views/main.html',
         controller: 'MainCtrl'
       })
+      .when('/thoughts', {
+        templateUrl: 'views/thought-list.html',
+        controller: 'ThoughtListCtrl'
+      })
+      .when('/thoughts/:thoughtId', {
+        templateUrl: 'views/thought-detail.html',
+        controller: 'ThoughtDetailCtrl'
+      })
       .otherwise({
         redirectTo: '/'
       });

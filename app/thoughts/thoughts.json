@@ -1,0 +1,12 @@
+[
+    {
+        "id": 0, 
+        "situation": "At home", 
+        "automaticThoughts": "Happy"
+    },
+    {
+        "id": 1, 
+        "situation": "At work", 
+        "automaticThoughts": "Sad"
+    }    
+]

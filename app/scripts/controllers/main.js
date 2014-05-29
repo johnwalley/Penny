@@ -1,6 +1,8 @@
 'use strict';
 
-angular.module('pennyApp')
+var pennyAppControllers = angular.module('pennyApp');
+
+pennyAppControllers
 .controller('MainCtrl', function ($scope, localStorageService) {
 
 	var defaultRating = 5;
@@ -32,3 +34,22 @@ angular.module('pennyApp')
 		$scope.thought.moods.splice(index, 1);
 	};
 });
+
+pennyAppControllers
+.controller('ThoughtListCtrl', ['$scope', 'Thoughts', function ($scope, Thoughts) {
+	
+	$scope.thoughts = Thoughts.query();
+
+	$scope.addThought = function() {
+
+	};
+
+}]);
+
+pennyAppControllers
+.controller('ThoughtDetailCtrl', ['$scope', '$routeParams', 'Thoughts', function ($scope, $routeParams, Thoughts) {
+	
+	$scope.thoughts = Thoughts.query();
+	$scope.thoughtId = $routeParams.thoughtId;
+
+}]);

@@ -1,0 +1,13 @@
+<div class="container">
+
+  <button class="button button-icon" ng-click="newThought()">
+    <i class="glyphicon glyphicon-plus"></i>
+  </button>
+
+  <ul class="list-unstyled">
+    <li ng-repeat="thought in thoughts">
+      <a href="#/thoughts/{{thought.id}}">{{thought.situation}}</a>
+    </li>
+  </ul>
+
+</div>
