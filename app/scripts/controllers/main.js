@@ -44,6 +44,10 @@ pennyAppControllers
 	
 	$scope.thoughts = Thoughts.query();
 
+  $scope.show = function(id) {
+    $location.path('thoughts/' + id);
+  };
+
   $scope.edit = function(id) {
     $location.path('thoughts/edit/' + id);
   };

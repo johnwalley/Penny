@@ -11,7 +11,7 @@
     <div class="col-xs-3">
       Sort by:
       <select ng-model="orderProp" class="form-control">
-        <option value="situation">Situation</option>
+        <option value="title">Title</option>
         <option value="-updated" selected>Newest</option>
       </select>
     </div>
@@ -23,16 +23,25 @@
     <button class="btn btn-primary">Add Thought</button>
   </a>
 
-  <ul class="list-unstyled">
-    <li ng-repeat="thought in thoughts | filter:query | orderBy:orderProp">
-      <a href="#/thoughts/{{thought.id}}">{{thought.title}}</a> - {{thought.updated | date:'dd/MM/yyyy @ h:mma'}}
-     <button class="btn btn-icon" ng-click="edit(thought.id)">
-       <i class="glyphicon glyphicon-pencil"></i>
-     </button>   
-     <button class="btn btn-icon" ng-click="remove(thought.id)">
-       <i class="glyphicon glyphicon-remove"></i>
-     </button>         
-   </li>
- </ul>
+  <div class="list-group">
+    <a class="list-group-item clearfix" ng-repeat="thought in thoughts | filter:query | orderBy:orderProp" ng-click="show(thought.id)">
+      <div class="row">
+        <div class="col-xs-8">
+          <h4 class="list-group-item-heading">{{thought.title}}</h4>
+          <p class="list-group-item-text">{{thought.updated | date:'dd/MM/yyyy @ h:mma'}}</p>
+        </div>
+        <div class="col-xs-4">
+          <span class="pull-right">
+            <button class="btn btn-icon" ng-click="edit(thought.id)">
+              <i class="glyphicon glyphicon-pencil"></i>
+            </button>
+            <button class="btn btn-icon" ng-click="remove(thought.id)">
+              <i class="glyphicon glyphicon-remove"></i>
+            </button>        
+          </span>
+        </div>
+      </div>
+    </a>
+  </div>
 
 </div>
