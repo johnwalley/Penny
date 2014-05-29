@@ -42,6 +42,8 @@ pennyAppControllers
 pennyAppControllers
 .controller('ThoughtListCtrl', ['$scope', '$location', 'Thoughts', '$modal', function ($scope, $location, Thoughts, $modal) {
 	
+  $scope.orderProp = '-updated';
+
 	$scope.thoughts = Thoughts.query();
 
   $scope.confirm = function (id) {
