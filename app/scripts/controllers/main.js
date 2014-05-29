@@ -1,17 +1,26 @@
 'use strict';
 
 angular.module('pennyApp')
-.controller('MainCtrl', function ($scope) {
+.controller('MainCtrl', function ($scope, localStorageService) {
 
 	var defaultRating = 5;
 
 	$scope.debug = false;
-
 	$scope.mood = { description: '', rating: defaultRating };
 
-	$scope.thought = {};
-	$scope.thought.moods = [ {description: 'Happy', rating: 3},
-	{description: 'Sad', rating: 4}];
+	var thoughtInStore = localStorageService.get('thought');
+
+	if (thoughtInStore) {
+		$scope.thought = thoughtInStore;
+	}
+	else {
+		$scope.thought = {};
+		$scope.thought.moods = [];
+	}
+
+	$scope.save = function () {
+		localStorageService.add('thought', angular.toJson($scope.thought));
+	};
 
 	$scope.addMood = function () {
 		$scope.mood.ratingNow = $scope.mood.rating;

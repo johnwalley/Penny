@@ -1,6 +1,6 @@
 # Penny
 
-Thought record
+A thought record for the web.
 
 ## Installing Penny
 
