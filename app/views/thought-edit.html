@@ -5,6 +5,13 @@
   <pre ng-show="debug">thought = {{thought | json}}</pre>    
 
   <div class="row">
+    <h2>Title</h2>
+    <div class="form-group">
+      <input type="text" ng-model="thought.title" class="form-control">
+    </div>
+  </div>   
+
+  <div class="row">
     <h2>Situation</h2>
     <div class="form-group">
       <textarea class="form-control" id="situation" ng-model="thought.situation" placeholder="Who were you with? What were you doing? When was it? Where were you?" rows="3"></textarea>
