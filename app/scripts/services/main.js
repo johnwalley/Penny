@@ -7,9 +7,8 @@ pennyAppServices
 
   return {
     query: function() {
-      var foo = [ 1, 2 ];
-      localStorageService.add('foo', foo);
-      return localStorageService.get('thoughts');
+      var thoughts = localStorageService.get('thoughts');
+      return thoughts || [];
     },
     get: function(id) {
       var thoughts = localStorageService.get('thoughts');

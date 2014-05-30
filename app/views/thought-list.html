@@ -12,59 +12,55 @@
     </div>
 </script>
 
-<div class="container">
+<button class="btn btn-info" ng-click="debug=!debug">Debug</button>
+<hr>
+<pre ng-show="debug">thoughts = {{thoughts | json}}</pre>    
 
-  <button class="btn btn-info" ng-click="debug=!debug">Debug</button>
-  <hr>
-  <pre ng-show="debug">thoughts = {{thoughts | json}}</pre>    
-
-  <div class="row">
-    <div class="col-xs-8">
-      Search: <input class="form-control" placeholder="Search..." ng-model="query">
-    </div>
-    <div class="col-xs-4">
-      Sort by:
-      <select ng-model="orderProp" class="form-control">
-        <option value="title">Title</option>
-        <option value="-updated" selected>Newest</option>
-        <option value="+updated">Oldest</option>
-      </select>
-    </div>
+<div class="row">
+  <div class="col-xs-8">
+    Search: <input class="form-control" placeholder="Search..." ng-model="query">
   </div>
-
-  <hr/>
-
-  <div class="row">
-    <div class="col-xs-8">
-      <p>
-        <a href="#/thoughts/add">
-          <button class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span> New Thought</button>
-        </a>
-      </p>
-    </div>
+  <div class="col-xs-4">
+    Sort by:
+    <select ng-model="orderProp" class="form-control">
+      <option value="title">Title</option>
+      <option value="-updated" selected>Newest</option>
+      <option value="+updated">Oldest</option>
+    </select>
   </div>
+</div>
 
-  <div class="list-group">
-    <a class="list-group-item clearfix" ng-repeat="thought in thoughts | filter:query | orderBy:orderProp" ng-click="show(thought.id)">
-      <div class="row">
-        <div class="col-xs-8">
-          <h4 class="list-group-item-heading">{{thought.title}}</h4>
-          <p class="list-group-item-text">{{thought.updated | date:'d MMM y h:mm a'}}</p>
-        </div>
-        <div class="col-xs-4">
-          <span class="pull-right">
-            <div class="btn-group">       
-              <button class="btn btn-default" ng-click="edit(thought.id); $event.stopPropagation()">
-                <span class="glyphicon glyphicon-pencil"></span>
-              </button>
-              <button class="btn btn-danger" ng-click="confirm(thought.id); $event.stopPropagation()">
-                <span class="glyphicon glyphicon-remove"></span>
-              </button>  
-            </div>      
-          </span>
-        </div>
+<hr/>
+
+<div class="row">
+  <div class="col-xs-8">
+    <p>
+      <a href="#/thoughts/add">
+        <button class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span> New Thought</button>
+      </a>
+    </p>
+  </div>
+</div>
+
+<div class="list-group">
+  <a class="list-group-item clearfix" ng-repeat="thought in thoughts | filter:query | orderBy:orderProp" ng-click="show(thought.id)">
+    <div class="row">
+      <div class="col-xs-8">
+        <h4 class="list-group-item-heading">{{thought.title}}</h4>
+        <p class="list-group-item-text">{{thought.updated | date:'d MMM y h:mm a'}}</p>
       </div>
-    </a>
-  </div>
-
+      <div class="col-xs-4">
+        <span class="pull-right">
+          <div class="btn-group">       
+            <button class="btn btn-default" ng-click="edit(thought.id); $event.stopPropagation()">
+              <span class="glyphicon glyphicon-pencil"></span>
+            </button>
+            <button class="btn btn-danger" ng-click="confirm(thought.id); $event.stopPropagation()">
+              <span class="glyphicon glyphicon-remove"></span>
+            </button>  
+          </div>      
+        </span>
+      </div>
+    </div>
+  </a>
 </div>
