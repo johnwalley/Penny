@@ -47,7 +47,7 @@ describe('Controller: ThoughtListCtrl', function () {
     scope = $rootScope.$new();
     var thoughts = [ {id: 1}, {id: 2} ];
     Thoughts.query = function () { return thoughts; };
-    Thoughts.remove = function(id) { thoughts.pop(); }
+    Thoughts.remove = function() { thoughts.pop(); };
     ThoughtListCtrl = $controller('ThoughtListCtrl', {
       $scope: scope,
       Thoughts: Thoughts
