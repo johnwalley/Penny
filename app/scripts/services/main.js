@@ -22,6 +22,8 @@ pennyAppServices
     store: function(thought) {
       var thoughts = this.query();
 
+      thought.updated = new Date();
+
       // Are we editing or adding?
       var exist = false;
       for (var i = 0; i < thoughts.length; i++) {
@@ -43,7 +45,7 @@ pennyAppServices
 
         thought.id = highest + 1;
 
-        thought.updated = new Date();
+        thought.created = new Date();
 
         thoughts.push(thought);
       }
