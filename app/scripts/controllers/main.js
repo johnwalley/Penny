@@ -40,11 +40,41 @@ pennyAppControllers
 }]);
 
 pennyAppControllers
-.controller('ThoughtListCtrl', ['$scope', '$location', 'Thoughts', '$modal', function ($scope, $location, Thoughts, $modal) {
-	
+.controller('ThoughtListCtrl', ['$scope', '$location', 'Thoughts', '$modal', 'dropstoreClient', function ($scope, $location, Thoughts, $modal, dropstoreClient) {
+
+  var taskTable;
+
+  var _client = new Dropbox.Client({key: '6b0gayemcg13s4c'});
+
   $scope.orderProp = '-updated';
 
-	$scope.thoughts = Thoughts.query();
+  $scope.thoughts = Thoughts.query();
+
+  // Try to finish OAuth authorization.
+  _client.authenticate({interactive: false}, function (error) {
+      if (error) {
+          alert('Authentication error: ' + error);
+      }
+  });
+
+  if (_client.isAuthenticated()) {
+    _client.getDatastoreManager().openDefaultDatastore(function (error, datastore) {
+      if (error) {
+        alert('Error opening default datastore: ' + error);
+      }
+      taskTable = datastore.getTable('thoughts');
+    });
+  }
+
+  $scope.authenticate = function () {
+
+    _client.authenticate();
+
+  };
+
+  $scope.add = function () {
+    taskTable.insert({ name: 'John'});
+  };
 
   $scope.confirm = function (id) {
 

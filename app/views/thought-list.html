@@ -12,6 +12,9 @@
     </div>
 </script>
 
+<button class="btn btn-info" ng-click="authenticate()">Link to DropBox</button>
+<button class="btn btn-info" ng-click="add()">add</button>
+
 <button class="btn btn-info" ng-click="debug=!debug">Debug</button>
 <hr>
 <pre ng-show="debug">thoughts = {{thoughts | json}}</pre>    
@@ -35,7 +38,7 @@
 <div class="row">
   <div class="col-xs-8">
     <p>
-      <a href="#/thoughts/add">
+      <a href="/thoughts/add">
         <button class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span> New Thought</button>
       </a>
     </p>

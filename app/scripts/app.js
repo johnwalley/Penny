@@ -4,9 +4,10 @@ angular.module('pennyApp', [
   'ngResource',
   'ngRoute',
   'ui.bootstrap',
-  'LocalStorageModule'
+  'LocalStorageModule',
+  'dropstore-ng'
 ])
-  .config(function ($routeProvider) {
+  .config(function ($routeProvider, $locationProvider) {
     $routeProvider
       .when('/', {
         templateUrl: 'views/thought-list.html',
@@ -31,6 +32,10 @@ angular.module('pennyApp', [
       .otherwise({
         redirectTo: '/'
       });
+
+      // use the HTML5 History API
+      $locationProvider.hashPrefix('!');
+      $locationProvider.html5Mode(true);
   })
   .config(['localStorageServiceProvider', function(localStorageServiceProvider){
     localStorageServiceProvider.setPrefix('ls');
