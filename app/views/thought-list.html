@@ -13,11 +13,11 @@
 </script>
 
 <button class="btn btn-info" ng-click="authenticate()">Link to DropBox</button>
-<button class="btn btn-info" ng-click="add()">add</button>
+<button class="btn btn-info" ng-click="add()">Clear thoughts</button>
 
 <button class="btn btn-info" ng-click="debug=!debug">Debug</button>
 <hr>
-<pre ng-show="debug">thoughts = {{thoughts | json}}</pre>    
+<pre ng-show="debug">thoughts = {{thoughts.toString()}}</pre>    
 
 <div class="row">
   <div class="col-xs-8">
@@ -50,7 +50,7 @@
     <div class="row">
       <div class="col-xs-8">
         <h4 class="list-group-item-heading">{{thought.title}}</h4>
-        <p class="list-group-item-text">{{thought.updated | date:'d MMM y h:mm a'}}</p>
+        <p class="list-group-item-text">{{thought.update | date:'d MMM y h:mm a'}}</p>
       </div>
       <div class="col-xs-4">
         <span class="pull-right">
@@ -58,7 +58,7 @@
             <button class="btn btn-default" ng-click="edit(thought.id); $event.stopPropagation()">
               <span class="glyphicon glyphicon-pencil"></span>
             </button>
-            <button class="btn btn-danger" ng-click="confirm(thought.id); $event.stopPropagation()">
+            <button class="btn btn-danger" ng-click="remove(thought.id); $event.stopPropagation()">
               <span class="glyphicon glyphicon-remove"></span>
             </button>  
           </div>      

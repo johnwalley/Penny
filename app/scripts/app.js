@@ -5,7 +5,9 @@ angular.module('pennyApp', [
   'ngRoute',
   'ui.bootstrap',
   'LocalStorageModule',
-  'dropstore-ng'
+  'dropstore-ng',
+  'recordWrapper',
+  'xeditable'
 ])
   .config(function ($routeProvider, $locationProvider) {
     $routeProvider
@@ -33,10 +35,13 @@ angular.module('pennyApp', [
         redirectTo: '/'
       });
 
-      // use the HTML5 History API
-      $locationProvider.hashPrefix('!');
-      $locationProvider.html5Mode(true);
+    // use the HTML5 History API
+    $locationProvider.hashPrefix('!');
+    $locationProvider.html5Mode(true);
   })
   .config(['localStorageServiceProvider', function(localStorageServiceProvider){
     localStorageServiceProvider.setPrefix('ls');
-  }]);
+  }])
+  .run(function(editableOptions) {
+    editableOptions.theme = 'bs3'; // bootstrap3 theme. Can be also 'bs2', 'default'
+  });;

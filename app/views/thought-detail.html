@@ -5,8 +5,12 @@
 <button class="btn btn-primary" ng-click="edit(thought.id)">Edit</button>
 
 <div class="row">
+  <a editable-text="thought.title" buttons="no">{{thought.title}}</a>
+</div> 
+
+<div class="row">
   <h2>Situation</h2>
-  <p>{{thought.situation}}</p>
+  <span editable-text="thought.situation" buttons="no">{{thought.situation}}</span>
 </div>    
 
 <div class="row">

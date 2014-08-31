@@ -3,77 +3,60 @@
 var pennyAppControllers = angular.module('pennyApp');
 
 pennyAppControllers
-.controller('ThoughtEditCtrl',  ['$scope', '$routeParams', '$location', 'Thoughts', function ($scope, $routeParams, $location, Thoughts) {
+.controller('ThoughtEditCtrl',  ['$scope', '$routeParams', '$location', 'DropboxThoughts', 'recordWrapper', function ($scope, $routeParams, $location, DropboxThoughts, recordWrapper) {
 
-	var defaultRating = 5;
+  var defaultRating = 5;
 
-	$scope.debug = false;
-	$scope.mood = { description: '', rating: defaultRating };
+  $scope.recordWrapper = recordWrapper;
 
-	if ($routeParams.thoughtId) {
-		$scope.thought = Thoughts.get($routeParams.thoughtId);
-	}
-	else {
-		$scope.thought = {};
-		$scope.thought.moods = [];
-	}
+  $scope.debug = false;
+  $scope.mood = { description: '', rating: defaultRating };
 
-	$scope.save = function () {
-		Thoughts.store($scope.thought);
-    $location.path('thoughts');
-	};
+  if ($routeParams.thoughtId) {
+    $scope.thought = DropboxThoughts.get($routeParams.thoughtId);
+  }
+  else {
+    $scope.thought = {};
+    $scope.thought.moods = [];
+  }
 
-  $scope.cancel = function () {
-    Thoughts.store($scope.thought);
-    $location.path('thoughts');
+  $scope.save = function () {
+    DropboxThoughts.store($scope.thought);
+    $location.path('/thoughts');
   };
 
-	$scope.addMood = function () {
-		$scope.mood.ratingNow = $scope.mood.rating;
-		$scope.thought.moods.push($scope.mood);
-		$scope.mood = { description: '', rating: defaultRating };
-	};
+  $scope.cancel = function () {
+    DropboxThoughts.store($scope.thought);
+    $location.path('/thoughts');
+  };
 
-	$scope.removeMood = function (index) {
-		$scope.thought.moods.splice(index, 1);
-	};
+  $scope.addMood = function () {
+    $scope.mood.ratingNow = $scope.mood.rating;
+    $scope.thought.moods.push($scope.mood);
+    $scope.mood = { description: '', rating: defaultRating };
+  };
+
+  $scope.removeMood = function (index) {
+    $scope.thought.moods.splice(index, 1);
+  };
 }]);
 
 pennyAppControllers
-.controller('ThoughtListCtrl', ['$scope', '$location', 'Thoughts', '$modal', 'dropstoreClient', function ($scope, $location, Thoughts, $modal, dropstoreClient) {
-
-  var taskTable;
-
-  var _client = new Dropbox.Client({key: '6b0gayemcg13s4c'});
+.controller('ThoughtListCtrl', ['$scope', '$location', 'Thoughts', '$modal', 'DropboxThoughts', function ($scope, $location, Thoughts, $modal, DropboxThoughts) {
 
   $scope.orderProp = '-updated';
 
-  $scope.thoughts = Thoughts.query();
-
-  // Try to finish OAuth authorization.
-  _client.authenticate({interactive: false}, function (error) {
-      if (error) {
-          alert('Authentication error: ' + error);
-      }
+  DropboxThoughts.create().then(function() {
+    $scope.thoughts = DropboxThoughts.query();
   });
 
-  if (_client.isAuthenticated()) {
-    _client.getDatastoreManager().openDefaultDatastore(function (error, datastore) {
-      if (error) {
-        alert('Error opening default datastore: ' + error);
-      }
-      taskTable = datastore.getTable('thoughts');
-    });
-  }
-
   $scope.authenticate = function () {
-
-    _client.authenticate();
 
   };
 
   $scope.add = function () {
-    taskTable.insert({ name: 'John'});
+    DropboxThoughts.clear();
+    $scope.thoughts = DropboxThoughts.query();
   };
 
   $scope.confirm = function (id) {
@@ -107,11 +90,11 @@ pennyAppControllers
   };
 
   $scope.show = function(id) {
-    $location.path('thoughts/' + id);
+    $location.path('/thoughts/' + id);
   };
 
   $scope.edit = function(id) {
-    $location.path('thoughts/edit/' + id);
+    $location.path('/thoughts/edit/' + id);
   };
 
   $scope.remove = function(id) {
@@ -122,12 +105,12 @@ pennyAppControllers
 }]);
 
 pennyAppControllers
-.controller('ThoughtDetailCtrl', ['$scope', '$location', '$routeParams', 'Thoughts', function ($scope, $location, $routeParams, Thoughts) {
-	
-	$scope.thought = Thoughts.get($routeParams.thoughtId);
+.controller('ThoughtDetailCtrl', ['$scope', '$location', '$routeParams', 'DropboxThoughts', function ($scope, $location, $routeParams, DropboxThoughts) {
+  
+  $scope.thought = DropboxThoughts.get($routeParams.thoughtId);
 
   $scope.edit = function(id) {
-    $location.path('thoughts/edit/' + id);
+    $location.path('/thoughts/edit/' + id);
   };
 
 }]);

@@ -80,7 +80,7 @@ module.exports = function (grunt) {
           base: [
             '.tmp',
             '<%= yeoman.app %>'
-          ]
+          ]    
         }
       },
       test: {
