@@ -1,6 +1,8 @@
 {
   "name": "penny",
   "version": "0.0.0",
+  "type": "git",
+  "url": "git://github.com/johnwalley/Penny.git",
   "dependencies": {},
   "devDependencies": {
     "connect-modrewrite": "^0.2.3",
