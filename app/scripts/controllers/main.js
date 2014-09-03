@@ -7,6 +7,8 @@ pennyAppControllers
 
   var defaultRating = 5;
 
+  DropboxThoughts.create();
+
   $scope.recordWrapper = recordWrapper;
 
   $scope.debug = false;
@@ -66,7 +68,7 @@ pennyAppControllers
       controller: ModalInstanceCtrl,
       resolve: {
         thought: function () {
-          return Thoughts.get(id);
+          return DropboxThoughts.get(id);
         }
       }
     });
@@ -98,8 +100,8 @@ pennyAppControllers
   };
 
   $scope.remove = function(id) {
-    Thoughts.remove(id);
-    $scope.thoughts = Thoughts.query();
+    DropboxThoughts.remove(id);
+    $scope.thoughts = DropboxThoughts.query();
   };
 
 }]);
