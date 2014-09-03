@@ -85,9 +85,6 @@ module.exports = function (grunt) {
           base: [
             '.tmp',
             '<%= yeoman.app %>'
-<<<<<<< HEAD
-          ]
-=======
           ],
           middleware: function (connect) {
               return [
@@ -95,7 +92,6 @@ module.exports = function (grunt) {
                   mountFolder(connect, 'app')
               ];
           }     
->>>>>>> 38a0887... Make html5 routing work for dev using url rewriting on the server
         }
       },
       test: {
