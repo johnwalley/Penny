@@ -17,7 +17,7 @@
 
 <button class="btn btn-info" ng-click="debug=!debug">Debug</button>
 <hr>
-<pre ng-show="debug">thoughts = {{thoughts.toString()}}</pre>    
+<pre ng-show="debug">thoughts = {{thoughts}}</pre>    
 
 <div class="row">
   <div class="col-xs-8">
@@ -27,8 +27,8 @@
     Sort by:
     <select ng-model="orderProp" class="form-control">
       <option value="title">Title</option>
-      <option value="-updated" selected>Newest</option>
-      <option value="+updated">Oldest</option>
+      <option value="-update" selected>Newest</option>
+      <option value="+update">Oldest</option>
     </select>
   </div>
 </div>
