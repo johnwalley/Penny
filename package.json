@@ -5,10 +5,7 @@
   "url": "git://github.com/johnwalley/Penny.git",
   "dependencies": {},
   "devDependencies": {
-<<<<<<< HEAD
-=======
     "connect-modrewrite": "^0.7.9",
->>>>>>> 38a0887... Make html5 routing work for dev using url rewriting on the server
     "grunt": "~0.4.1",
     "grunt-autoprefixer": "~0.4.0",
     "grunt-bower-install": "~0.7.0",
