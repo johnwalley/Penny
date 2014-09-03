@@ -15,6 +15,11 @@ module.exports = function (grunt) {
   // Time how long tasks take. Can help when optimizing build times
   require('time-grunt')(grunt);
 
+  var modRewrite = require('connect-modrewrite');
+  var mountFolder = function (connect, dir) {
+      return connect.static(require('path').resolve(dir));
+  };  
+
   grunt.loadNpmTasks('grunt-gh-pages');
 
   // Define the configuration for all the tasks
@@ -80,7 +85,13 @@ module.exports = function (grunt) {
           base: [
             '.tmp',
             '<%= yeoman.app %>'
-          ]    
+          ],
+          middleware: function (connect) {
+              return [
+                  modRewrite (['!\\.html|\\.js|\\.svg|\\.css|\\.png|\\.jpg$ /index.html [L]']),
+                  mountFolder(connect, 'app')
+              ];
+          }     
         }
       },
       test: {
@@ -333,6 +344,7 @@ module.exports = function (grunt) {
     }
   });
 
+  grunt.loadNpmTasks('grunt-contrib-connect');
 
   grunt.registerTask('serve', function (target) {
     if (target === 'dist') {
