@@ -36,7 +36,7 @@ pennyAppServices
 
       for (var i = records.length - 1; i >= 0; i--) {
         records[i].deleteRecord();
-      };
+      }
     },
     query: function() {
       var table = _datastore.getTable('thoughts');

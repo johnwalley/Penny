@@ -6,8 +6,7 @@ angular.module('pennyApp', [
   'ui.bootstrap',
   'LocalStorageModule',
   'dropstore-ng',
-  'recordWrapper',
-  'xeditable'
+  'recordWrapper'
 ])
   .config(function ($routeProvider, $locationProvider) {
     $routeProvider
@@ -44,4 +43,4 @@ angular.module('pennyApp', [
   }])
   .run(function(editableOptions) {
     editableOptions.theme = 'bs3'; // bootstrap3 theme. Can be also 'bs2', 'default'
-  });;
+  });

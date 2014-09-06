@@ -46,7 +46,7 @@ pennyAppControllers
 pennyAppControllers
 .controller('ThoughtListCtrl', ['$scope', '$location', 'Thoughts', '$modal', 'DropboxThoughts', function ($scope, $location, Thoughts, $modal, DropboxThoughts) {
 
-  $scope.orderProp = '-updated';
+  $scope.orderProp = '-update';
 
   DropboxThoughts.create().then(function() {
     $scope.thoughts = DropboxThoughts.query();

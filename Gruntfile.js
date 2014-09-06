@@ -18,7 +18,7 @@ module.exports = function (grunt) {
   var modRewrite = require('connect-modrewrite');
   var mountFolder = function (connect, dir) {
       return connect.static(require('path').resolve(dir));
-  };  
+  };
 
   grunt.loadNpmTasks('grunt-gh-pages');
 
@@ -87,11 +87,11 @@ module.exports = function (grunt) {
             '<%= yeoman.app %>'
           ],
           middleware: function (connect) {
-              return [
-                  modRewrite (['!\\.html|\\.js|\\.svg|\\.css|\\.png|\\.woff|\\.ttf|\\.jpg$ /index.html [L]']),
-                  mountFolder(connect, 'app')
-              ];
-          }     
+            return [
+                modRewrite (['!\\.html|\\.js|\\.svg|\\.css|\\.png|\\.woff|\\.ttf|\\.jpg$ /index.html [L]']),
+                mountFolder(connect, 'app')
+            ];
+          }    
         }
       },
       test: {
