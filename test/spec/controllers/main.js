@@ -6,13 +6,23 @@ describe('Controller: ThoughtEditCtrl', function () {
   beforeEach(module('pennyApp'));
 
   var ThoughtEditCtrl,
-    scope;
+    scope,
+    mockDropboxThoughts;
+
+  beforeEach(function() {
+    mockDropboxThoughts = {
+      create: function() {
+
+      }
+    }
+  });
 
   // Initialize the controller and a mock scope
-  beforeEach(inject(function ($controller, $rootScope) {
+  beforeEach(inject(function ($controller, $rootScope, DropboxThoughts) {
     scope = $rootScope.$new();
     ThoughtEditCtrl = $controller('ThoughtEditCtrl', {
       $scope: scope,
+      DropboxThoughts: mockDropboxThoughts
     });
   }));
 
@@ -40,22 +50,37 @@ describe('Controller: ThoughtListCtrl', function () {
   beforeEach(module('pennyApp'));
 
   var ThoughtListCtrl,
-    scope;
+    scope,
+    mockDropboxThoughts;
+
+  beforeEach(inject(function ($q) {
+    var thoughts = [ {id: 1}, {id: 2} ];
+    mockDropboxThoughts = {
+      create: function() {
+        var deferred = $q.defer();
+        deferred.resolve('Remote call result');
+        return deferred.promise;
+      },
+      query: function () {
+        return thoughts;
+      },
+      remove: function() {
+        thoughts.pop();
+      }
+    };
+  }));
 
   // Initialize the controller and a mock scope
-  beforeEach(inject(function ($controller, $rootScope, Thoughts) {
+  beforeEach(inject(function ($controller, $rootScope, DropboxThoughts) {
     scope = $rootScope.$new();
-    var thoughts = [ {id: 1}, {id: 2} ];
-    Thoughts.query = function () { return thoughts; };
-    Thoughts.remove = function() { thoughts.pop(); };
     ThoughtListCtrl = $controller('ThoughtListCtrl', {
       $scope: scope,
-      Thoughts: Thoughts
+      DropboxThoughts: mockDropboxThoughts
     });
   }));
 
   it('should have no thoughts to start', function () {
-      expect(scope.thoughts.length).toBe(2);
+      expect(scope.thoughts.length).toBe(0);
     });
 
   it('should remove thoughts from the list', function () {

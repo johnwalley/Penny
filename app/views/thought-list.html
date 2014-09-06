@@ -12,9 +12,12 @@
     </div>
 </script>
 
+<button class="btn btn-info" ng-click="authenticate()">Link to DropBox</button>
+<button class="btn btn-info" ng-click="add()">Clear thoughts</button>
+
 <button class="btn btn-info" ng-click="debug=!debug">Debug</button>
 <hr>
-<pre ng-show="debug">thoughts = {{thoughts | json}}</pre>    
+<pre ng-show="debug">thoughts = {{thoughts}}</pre>    
 
 <div class="row">
   <div class="col-xs-8">
@@ -24,8 +27,10 @@
     Sort by:
     <select ng-model="orderProp" class="form-control">
       <option value="title">Title</option>
-      <option value="-updated" selected>Newest</option>
-      <option value="+updated">Oldest</option>
+      <option value="-created" selected>Newest</option>
+      <option value="+created">Oldest</option>      
+      <option value="-update" selected>Updated most recently</option>
+      <option value="+update">Updated least recently</option>
     </select>
   </div>
 </div>
@@ -35,7 +40,7 @@
 <div class="row">
   <div class="col-xs-8">
     <p>
-      <a href="#/thoughts/add">
+      <a href="/thoughts/add">
         <button class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span> New Thought</button>
       </a>
     </p>
@@ -47,7 +52,7 @@
     <div class="row">
       <div class="col-xs-8">
         <h4 class="list-group-item-heading">{{thought.title}}</h4>
-        <p class="list-group-item-text">{{thought.updated | date:'d MMM y h:mm a'}}</p>
+        <p class="list-group-item-text">{{thought.update | date:'d MMM y h:mm a'}}</p>
       </div>
       <div class="col-xs-4">
         <span class="pull-right">
@@ -55,7 +60,7 @@
             <button class="btn btn-default" ng-click="edit(thought.id); $event.stopPropagation()">
               <span class="glyphicon glyphicon-pencil"></span>
             </button>
-            <button class="btn btn-danger" ng-click="confirm(thought.id); $event.stopPropagation()">
+            <button class="btn btn-danger" ng-click="remove(thought.id); $event.stopPropagation()">
               <span class="glyphicon glyphicon-remove"></span>
             </button>  
           </div>      
