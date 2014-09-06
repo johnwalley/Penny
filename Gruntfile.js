@@ -18,7 +18,7 @@ module.exports = function (grunt) {
   var modRewrite = require('connect-modrewrite');
   var mountFolder = function (connect, dir) {
       return connect.static(require('path').resolve(dir));
-  };
+  }
 
   grunt.loadNpmTasks('grunt-gh-pages');
 
