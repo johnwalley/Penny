@@ -5,7 +5,8 @@ angular.module('pennyApp', [
   'ngRoute',
   'ui.bootstrap',
   'LocalStorageModule',
-  'dropstore-ng'
+  'dropstore-ng',
+  'recordWrapper'
 ])
   .config(function ($routeProvider, $locationProvider) {
     $routeProvider

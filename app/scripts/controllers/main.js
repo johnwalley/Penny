@@ -48,6 +48,8 @@ pennyAppControllers
 
   $scope.orderProp = '-update';
 
+  $scope.thoughts = [];
+
   DropboxThoughts.create().then(function() {
     $scope.thoughts = DropboxThoughts.query();
   });

@@ -23,7 +23,11 @@ module.exports = function(config) {
       'test/spec/**/*.js',
       'app/bower_components/angular-resource/angular-resource.js',
       'app/bower_components/angular-route/angular-route.js',
-      'app/bower_components/angular-bootstrap/ui-bootstrap.js'
+      'app/bower_components/angular-bootstrap/ui-bootstrap.js',
+      'app/bower_components/bootstrap/dist/js/bootstrap.js',
+      'app/bower_components/angular-bootstrap/ui-bootstrap-tpls.js',
+      'app/bower_components/dropstore-ng/dropstore-ng.js',
+      'https://www.dropbox.com/static/api/dropbox-datastores-1.0-latest.js'
     ],
 
     // list of files / patterns to exclude
@@ -34,7 +38,7 @@ module.exports = function(config) {
 
     // level of logging
     // possible values: LOG_DISABLE || LOG_ERROR || LOG_WARN || LOG_INFO || LOG_DEBUG
-    logLevel: config.LOG_INFO,
+    logLevel: config.LOG_DEBUG,
 
 
     // enable / disable watching file and executing tests whenever any file changes
