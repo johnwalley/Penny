@@ -7,8 +7,6 @@ pennyAppControllers
 
   var defaultRating = 5;
 
-  DropboxThoughts.create();
-
   $scope.recordWrapper = recordWrapper;
 
   $scope.debug = false;
@@ -45,25 +43,23 @@ pennyAppControllers
 
 pennyAppControllers
 .controller('NavCtrl', ['$scope', '$location', 'DropboxThoughts', function ($scope, $location, DropboxThoughts) {
-  DropboxThoughts.create().then(function() {
-    $scope.thoughts = DropboxThoughts.query();
-    $scope.user = DropboxThoughts.getUserInfo();
+  DropboxThoughts.getUserInfo().then(function(user) {
+    $scope.user = user;
   });
-}])
+}]);
+
+pennyAppControllers
 .controller('ThoughtListCtrl', ['$scope', '$location', 'Thoughts', '$modal', 'DropboxThoughts', function ($scope, $location, Thoughts, $modal, DropboxThoughts) {
 
-  $scope.orderProp = '-update';
+  $scope.orderProp = '-updated';
 
-  $scope.thoughts = [];
-
-  DropboxThoughts.create().then(function() {
-    $scope.thoughts = DropboxThoughts.query();
-    $scope.user = DropboxThoughts.getUserInfo();
+  $scope.thoughts = DropboxThoughts.query().then(function(thoughts) {
+    $scope.thoughts = thoughts;
   });
 
-  $scope.authenticate = function () {
-
-  };
+  DropboxThoughts.getUserInfo().then(function(user) {
+    $scope.user = user;
+  });
 
   $scope.add = function () {
     DropboxThoughts.clear();
@@ -124,10 +120,11 @@ pennyAppControllers
     $location.path('/thoughts/edit/' + id);
   };
 
-}])
+}]);
+
+pennyAppControllers
 .controller('SettingsCtrl', ['$scope', '$location', 'DropboxThoughts', function ($scope, $location, DropboxThoughts) {
-  DropboxThoughts.create().then(function() {
-    $scope.thoughts = DropboxThoughts.query();
-    $scope.user = DropboxThoughts.getUserInfo();
+  DropboxThoughts.getUserInfo().then(function(user) {
+    $scope.user = user;
   });
 }]);
