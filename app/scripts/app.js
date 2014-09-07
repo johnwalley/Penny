@@ -30,6 +30,10 @@ angular.module('pennyApp', [
         templateUrl: 'views/thought-edit.html',
         controller: 'ThoughtEditCtrl'
       })
+      .when('/settings', {
+        templateUrl: 'views/settings.html',
+        controller: 'SettingsCtrl'
+      })
       .otherwise({
         redirectTo: '/'
       });

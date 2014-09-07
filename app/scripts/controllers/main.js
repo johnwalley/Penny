@@ -44,6 +44,12 @@ pennyAppControllers
 }]);
 
 pennyAppControllers
+.controller('NavCtrl', ['$scope', '$location', 'DropboxThoughts', function ($scope, $location, DropboxThoughts) {
+  DropboxThoughts.create().then(function() {
+    $scope.thoughts = DropboxThoughts.query();
+    $scope.user = DropboxThoughts.getUserInfo();
+  });
+}])
 .controller('ThoughtListCtrl', ['$scope', '$location', 'Thoughts', '$modal', 'DropboxThoughts', function ($scope, $location, Thoughts, $modal, DropboxThoughts) {
 
   $scope.orderProp = '-update';
@@ -52,6 +58,7 @@ pennyAppControllers
 
   DropboxThoughts.create().then(function() {
     $scope.thoughts = DropboxThoughts.query();
+    $scope.user = DropboxThoughts.getUserInfo();
   });
 
   $scope.authenticate = function () {
@@ -117,4 +124,10 @@ pennyAppControllers
     $location.path('/thoughts/edit/' + id);
   };
 
+}])
+.controller('SettingsCtrl', ['$scope', '$location', 'DropboxThoughts', function ($scope, $location, DropboxThoughts) {
+  DropboxThoughts.create().then(function() {
+    $scope.thoughts = DropboxThoughts.query();
+    $scope.user = DropboxThoughts.getUserInfo();
+  });
 }]);

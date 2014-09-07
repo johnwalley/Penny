@@ -6,6 +6,8 @@ pennyAppServices
 .factory('DropboxThoughts', ['dropstoreClient', function (dropstoreClient) {
   var _datastore;
 
+  var user;
+
   var convert = function(record) {
     return {
       id: record.get('id'),
@@ -27,7 +29,20 @@ pennyAppServices
       })
       .then(function(datastore){
         _datastore = datastore;
+
         return datastore;
+      })
+      .then(function(datastore) {
+        return dropstoreClient.getAccountInfo({httpCache: true})
+      }).
+      then(function(accountInfo) {
+        console.log('getAccountInfo successful');
+
+        user = { name: accountInfo.name, email: accountInfo.email };
+
+        return user;
+      }, function(error){
+        console.log('getAccountInfo failure');
       });
     },
     clear: function() {
@@ -104,6 +119,9 @@ pennyAppServices
           thoughts[i].deleteRecord();
         }
       }
+    },
+    getUserInfo: function() {
+      return user;
     }
   };
 }]);

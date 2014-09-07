@@ -12,8 +12,7 @@
     "jquery-ui": "~1.10.4",
     "angular-local-storage": "~0.0.1",
     "angular-bootstrap": "~0.10.0",
-    "dropstore-ng": "~1.0.6",
-    "angular-xeditable": "~0.1.8"
+    "dropstore-ng": "~1.0.6"
   },
   "devDependencies": {
     "angular-mocks": "1.2.6",
